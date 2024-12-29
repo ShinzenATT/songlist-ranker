@@ -5,18 +5,19 @@ CREATE TABLE melodies (
 );
 
 CREATE TABLE tags (
-    name varchar(32) PRIMARY KEY
+    id Serial PRIMARY KEY,
+    name varchar(32) UNIQUE
 );
 
 CREATE TABLE songs (
-   id INT PRIMARY KEY,
+   id SERIAL PRIMARY KEY,
    title TEXT NOT NULL,
    melody INT REFERENCES melodies,
    contents TEXT NOT NULL,
    title_vectors tsvector GENERATED ALWAYS AS (to_tsvector('swedish', title)) STORED,
    content_vectors tsvector GENERATED ALWAYS AS (to_tsvector('swedish', contents)) STORED,
    ranking INT DEFAULT 1000 NOT NULL,
-   chapter varchar(32) REFERENCES tags
+   chapter INT REFERENCES tags
 );
 
 -- TODO: Prio 9: Intended to allow for 'custom' explanatory tags to find 'related'/themed songs.

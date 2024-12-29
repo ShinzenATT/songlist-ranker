@@ -9,5 +9,5 @@ object SongsTable: IntIdTable("songs") {
     val melody = optReference("melody", MelodyTable.id)
     val contents = text("contents")
     val ranking = integer("ranking").default(1000)
-    val chapter = optReference("chapter", TagTable.name)
+    val chapter = optReference("chapter", TagTable.id)
 }

@@ -38,6 +38,9 @@ dependencies {
     implementation(libs.spring.session.core)
     implementation(libs.kotlinx.serialization)
 
+    implementation(libs.springdoc.webmc.ui)
+    implementation(libs.springdoc.webflux.ui)
+
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)
