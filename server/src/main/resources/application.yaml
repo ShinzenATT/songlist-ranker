@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: hd api
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/hd"
+    username: "hd"
+    password: "hd"
