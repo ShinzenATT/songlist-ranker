@@ -14,5 +14,5 @@ class SongEntity(id: EntityID<Int>): IntEntity(id) {
     var ranking by SongsTable.ranking
     var chapter by TagEntity optionalReferencedOn SongsTable.chapter
     var melody by MelodyEntity optionalReferencedOn SongsTable.melody
-
+    val searchVectors by SongsTable.searchVectors
 }

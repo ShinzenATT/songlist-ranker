@@ -1,6 +1,11 @@
 package se.chalmers.hd.services
 
-import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.SizedIterable
+import org.jetbrains.exposed.sql.SortOrder
+import org.jetbrains.exposed.sql.alias
+import se.chalmers.hd.db.configuration.TsQuery
+import se.chalmers.hd.db.configuration.TsRank
+import se.chalmers.hd.db.configuration.tsQuery
 import se.chalmers.hd.db.melodies.MelodyEntity
 import se.chalmers.hd.db.melodies.MelodyTable
 import se.chalmers.hd.db.songs.SongEntity
@@ -9,6 +14,7 @@ import se.chalmers.hd.db.tags.TagEntity
 import se.chalmers.hd.db.tags.TagTable
 import se.chalmers.hd.dto.Melody
 import se.chalmers.hd.dto.Song
+import se.chalmers.hd.utils.mappers.toSongData
 import se.chalmers.hd.utils.mappers.update
 
 fun updateOrCreateMelody(melody: Melody):MelodyEntity {
@@ -42,4 +48,13 @@ fun updateOrCreateSong(song: Song):SongEntity {
         this.chapter = chapter
         this.melody = melody
     }
+}
+
+fun searchSongs(query: String): SizedIterable<SongEntity> {
+    val tsRank = TsRank(SongsTable.searchVectors, query).alias("rank")
+    val query = SongsTable.select(SongsTable.columns + tsRank)
+        .where { SongsTable.searchVectors tsQuery query }
+        .orderBy(tsRank, SortOrder.DESC)
+        .limit(10)
+    return SongEntity.wrapRows(query)
 }

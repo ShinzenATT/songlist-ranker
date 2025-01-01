@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController
 import se.chalmers.hd.services.updateOrCreateSong
 import se.chalmers.hd.db.songs.SongEntity
 import se.chalmers.hd.dto.Song
+import se.chalmers.hd.dto.requests.SearchRequest
+import se.chalmers.hd.services.searchSongs
 import se.chalmers.hd.utils.mappers.toSongData
 import kotlin.random.Random
 
@@ -36,5 +38,10 @@ class SongController {
     @PostMapping("/songs")
     suspend fun submitSong(@RequestBody song: Song) = suspendedTransactionAsync {
         return@suspendedTransactionAsync updateOrCreateSong(song).toSongData()
+    }.await()
+
+    @PostMapping("/songs/search")
+    suspend fun searchSong(@RequestBody request: SearchRequest) = suspendedTransactionAsync {
+        return@suspendedTransactionAsync searchSongs(request.query).map { it.toSongData() }.toList()
     }.await()
 }

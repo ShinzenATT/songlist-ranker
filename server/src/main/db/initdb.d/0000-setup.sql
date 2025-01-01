@@ -14,11 +14,12 @@ CREATE TABLE IF NOT EXISTS songs (
    title TEXT NOT NULL,
    melody INT REFERENCES melodies,
    contents TEXT NOT NULL,
-   title_vectors tsvector GENERATED ALWAYS AS (to_tsvector('swedish', title)) STORED,
-   content_vectors tsvector GENERATED ALWAYS AS (to_tsvector('swedish', contents)) STORED,
    ranking INT DEFAULT 1000 NOT NULL,
-   chapter INT REFERENCES tags
+   chapter INT REFERENCES tags,
+   search_vectors tsvector GENERATED ALWAYS AS (to_tsvector('swedish', title || ' ' || contents)) STORED
 );
+
+CREATE INDEX IF NOT EXISTS textsearch_songs ON songs USING GIN (search_vectors)
 
 -- TODO: Prio 9: Intended to allow for 'custom' explanatory tags to find 'related'/themed songs.
 -- Givet att vi vill ha tillbaka det då.
