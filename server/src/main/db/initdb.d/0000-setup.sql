@@ -1,15 +1,15 @@
-CREATE TABLE melodies (
+CREATE TABLE IF NOT EXISTS melodies (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     url TEXT
 );
 
-CREATE TABLE tags (
+CREATE TABLE IF NOT EXISTS tags (
     id Serial PRIMARY KEY,
     name varchar(32) UNIQUE
 );
 
-CREATE TABLE songs (
+CREATE TABLE IF NOT EXISTS songs (
    id SERIAL PRIMARY KEY,
    title TEXT NOT NULL,
    melody INT REFERENCES melodies,
