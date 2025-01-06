@@ -100,6 +100,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.ui.android)
+    implementation(libs.androidx.material3.android)
     debugImplementation(compose.uiTooling)
 }
 

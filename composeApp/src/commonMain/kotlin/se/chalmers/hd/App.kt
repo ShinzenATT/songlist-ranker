@@ -1,8 +1,10 @@
 package se.chalmers.hd
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -11,6 +13,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import se.chalmers.hd.models.AppState
 import se.chalmers.hd.views.HomeView
+import se.chalmers.hd.views.SongListView
 import se.chalmers.hd.views.ViewOne
 import se.chalmers.hd.views.ViewTwo
 
@@ -37,12 +40,12 @@ fun App() {
                         },
                     )
                     NavigationBarItem(
-                        icon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) },
-                        selected = navigator.lastItem is ViewOne,
-                        label = { Text("View One") },
+                        icon = { Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = null) },
+                        selected = navigator.lastItem is SongListView,
+                        label = { Text("Browse") },
                         onClick = {
                             navigator.popUntilRoot()
-                            navigator.push(ViewOne())
+                            navigator.push(SongListView())
                         },
                     )
                     NavigationBarItem(
