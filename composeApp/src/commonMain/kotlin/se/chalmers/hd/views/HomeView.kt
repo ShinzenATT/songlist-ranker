@@ -8,18 +8,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import se.chalmers.hd.models.AppState
 
-class HomeView: Screen {
+class HomeView: ScreenView {
+    override var rootPadding: PaddingValues = PaddingValues()
 
     @Composable
     @Preview
     override fun Content() {
         var song by remember { mutableStateOf("") }
-        val rootPadding by remember { AppState.paddingValueState }
         val navigator = LocalNavigator.current
 
         Column(
