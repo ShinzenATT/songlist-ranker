@@ -6,14 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import se.chalmers.hd.views.Home
 
 import songlist_ranker.composeapp.generated.resources.Res
 import songlist_ranker.composeapp.generated.resources.compose_multiplatform
@@ -24,7 +23,8 @@ fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-            Button(onClick = { showContent = !showContent }) {
+        /*
+        Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
@@ -34,6 +34,8 @@ fun App() {
                     Text("Compose: $greeting")
                 }
             }
+            */
+            Home()
         }
     }
 }
