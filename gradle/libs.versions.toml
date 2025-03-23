@@ -94,3 +94,4 @@ springDependencyManagement = {id = "io.spring.dependency-management", version = 
 springDoc = {id = "org.springdoc.openapi-gradle-plugin", version = "1.9.0"}
 kotlinxSerialization ={id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 asciidoctor = {id = "org.asciidoctor.jvm.convert", version = "3.3.2"}
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
