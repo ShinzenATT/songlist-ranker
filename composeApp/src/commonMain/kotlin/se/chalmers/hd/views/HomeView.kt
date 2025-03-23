@@ -1,5 +1,6 @@
 package se.chalmers.hd.views
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -7,24 +8,31 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import io.ktor.client.plugins.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import se.chalmers.hd.dto.Song
 import se.chalmers.hd.services.getRandomSong
+import se.chalmers.hd.services.getSong
+import se.chalmers.hd.services.searchSong
 
 class HomeView: ScreenView {
     override var rootPadding: PaddingValues = PaddingValues()
+    private var isLoading by mutableStateOf(false)
 
     @Composable
     @Preview
     override fun Content() {
         var search by remember { mutableStateOf("") }
         var song by remember { mutableStateOf<Song?>(null) }
+        remember { isLoading }
         val navigator = LocalNavigator.current
 
         LaunchedEffect(Unit) {
@@ -40,19 +48,12 @@ class HomeView: ScreenView {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = "HD-sektionens sånglista",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(bottom = 20.dp, top = 60.dp)
-            )
             ElevatedCard(
-                ///TODO: Add on click to navigate to the song.
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 8.dp,
                 ),
-                modifier = Modifier.fillMaxHeight(fraction = 0.7f).fillMaxWidth(fraction = 0.90f),
+                modifier = Modifier.fillMaxHeight(fraction = 0.7f).fillMaxWidth(fraction = 0.90f).clickable(song != null) { navigator!!.push(
+                    SongDetailView(song)) },
             ) {
                 if (song == null) {
                     CircularProgressIndicator(Modifier.fillMaxSize())
@@ -91,8 +92,7 @@ class HomeView: ScreenView {
             }
             ElevatedButton(
                 onClick = {
-                    navigator?.popUntilRoot()
-                    navigator?.push(HomeView())
+                    navigator!!.push(SongDetailView(null))
                 }
             ){
                 Text("Jag har tur!")
@@ -105,16 +105,44 @@ class HomeView: ScreenView {
                     placeholder = { Text("Sök efter sångtitel, lyrik eller ID") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                    keyboardActions = KeyboardActions(onSearch = { navigator!!.push(SongListView(search)) }),
+                    keyboardActions = KeyboardActions(onSearch = { navigateAccordingly(search, navigator!!) }),
                     trailingIcon = {
                         FilledTonalButton(
-                            onClick = { navigator!!.push(SongListView(search)) },
+                            onClick = { navigateAccordingly(search, navigator!!) },
                             enabled = true,
                         ) {
                             Text("Sök")
                         }
                     },
                 )
+            }
+        }
+    }
+
+
+    fun navigateAccordingly(search: String, navigator: Navigator) {
+        val query = search.trim()
+        if(query.isBlank()) return
+        isLoading = true
+        if(query.toIntOrNull() != null) {
+            CoroutineScope(Dispatchers.Default).launch {
+                try {
+                    val song = getSong(query.toInt())
+                    navigator.push(SongDetailView(song))
+                } catch (e: ServerResponseException) {
+                    e.printStackTrace()
+                }
+                isLoading = false
+            }
+        }
+        CoroutineScope(Dispatchers.Default).launch {
+            val songs = searchSong(query)
+            isLoading = false
+            if(songs.isEmpty()) return@launch
+            if(songs.size == 1) {
+                navigator.push(SongDetailView(songs[0]))
+            } else {
+                navigator.push(SongListView(query, songs))
             }
         }
     }

@@ -3,14 +3,18 @@ package se.chalmers.hd.views
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
 import io.ktor.client.plugins.*
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -21,11 +25,11 @@ import se.chalmers.hd.services.getSong
 import se.chalmers.hd.services.getSongList
 import se.chalmers.hd.services.searchSong
 
-class SongListView(initialSearch: String = "") : ScreenView{
+class SongListView(initialSearch: String = "", initialSongs: List<Song> = listOf()) : ScreenView{
     override var rootPadding: PaddingValues = PaddingValues()
     override val topBarTitle: @Composable (() -> Unit)
         get() = { Text("Sånger") }
-    private var songs: List<Song> by mutableStateOf(listOf())
+    private var songs: List<Song> by mutableStateOf(initialSongs)
     private var searchQuery by mutableStateOf(initialSearch)
     private var isLoading by mutableStateOf(true)
 
@@ -78,6 +82,7 @@ class SongListView(initialSearch: String = "") : ScreenView{
 
     @Composable
     fun SearchBar() {
+        val navigator = LocalNavigator.current
         remember { searchQuery }
         TextField(
             value = searchQuery,
@@ -87,7 +92,11 @@ class SongListView(initialSearch: String = "") : ScreenView{
             modifier = Modifier
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 20.dp),
-            singleLine = true
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = {
+                if(songs.size == 1) navigator?.push(SongDetailView(songs.first()))
+            })
         )
 
         if(isLoading){
@@ -155,9 +164,7 @@ class SongListView(initialSearch: String = "") : ScreenView{
                 groupedSongs.forEach { (chapter, chapterSongs) ->
                     // Chapter header
                     item {
-                        if (chapter != null) {
-                            ChapterHeader(chapterName = chapter)
-                        }
+                        ChapterHeader(chapterName = chapter)
                     }
                     // Songs in the chapter
                     items(chapterSongs) { song ->
