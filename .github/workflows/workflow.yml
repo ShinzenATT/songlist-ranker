@@ -124,7 +124,7 @@ jobs:
       - uses: actions/download-artifact@v4
         name: Download web artifact
         with:
-          name: songranker-web
+          name: song-ranker-web
           path: build/js/packages/composeApp/kotlin
       - name: Build and push Docker image
         id: push
