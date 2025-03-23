@@ -16,7 +16,7 @@ class TsQuery(val tsVectorColumn: Expression<String>, val query: String): Op<Boo
     companion object {
         fun sanitizeQuery(query: String): String {
             // Replace spaces with '&' for logical AND (to match all terms)
-            return query.trim().replace(Regex("\\s+"), " & ")
+            return query.trim().replace(Regex("\\s+"), "+") + ":*"
         }
     }
 }

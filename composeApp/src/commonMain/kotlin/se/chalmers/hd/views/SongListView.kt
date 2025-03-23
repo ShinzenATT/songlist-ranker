@@ -3,34 +3,38 @@ package se.chalmers.hd.views
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.ktor.client.plugins.*
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import se.chalmers.hd.components.SongItem
 import se.chalmers.hd.dto.Melody
 import se.chalmers.hd.dto.Song
+import se.chalmers.hd.services.getSong
+import se.chalmers.hd.services.getSongList
+import se.chalmers.hd.services.searchSong
 
-class SongListView : ScreenView{
+class SongListView(initialSearch: String = "") : ScreenView{
     override var rootPadding: PaddingValues = PaddingValues()
     override val topBarTitle: @Composable (() -> Unit)
         get() = { Text("Sånger") }
-    private var songs: List<Song> = listOf()
-    private var searchQuery by mutableStateOf("")
+    private var songs: List<Song> by mutableStateOf(listOf())
+    private var searchQuery by mutableStateOf(initialSearch)
+    private var isLoading by mutableStateOf(true)
 
     @Composable
     override fun Content() {
+        remember { isLoading }
+        remember { songs }
+        SongListEffect()
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -38,28 +42,57 @@ class SongListView : ScreenView{
         ) {
             // Always display the Search Bar at the top
             SearchBar()
-
-            // Show filtered songs or empty state
-            if (songs.isEmpty()) {
-                PreviewSongList()
+            if(isLoading && songs.isEmpty()) {
+                CircularProgressIndicator(Modifier.align(Alignment.CenterHorizontally))
+            } else {
+                SongListContent(songs)
             }
-            var filteredSongs = filterSongs(songs, searchQuery)
-            SongListContent(filteredSongs)
         }
     }
 
     @Composable
+    fun SongListEffect() = LaunchedEffect(searchQuery) {
+        isLoading = true
+        if(songs.isNotEmpty()) {
+            delay(400) // avoid spamming server while typing
+        }
+
+        var query = searchQuery.trim()
+        songs = if(query.toIntOrNull() != null) {
+            println("Searching for id ${query.toInt()}")
+            try {
+                listOf(getSong(query.toInt()))
+            }catch (e: ServerResponseException) {
+                e.printStackTrace()
+                listOf()
+            }
+        } else if(query.isNotBlank()){
+            println("Searching for $query")
+            searchSong(query)
+        } else {
+            getSongList()
+        }
+
+        isLoading = false
+    }
+
+    @Composable
     fun SearchBar() {
+        remember { searchQuery }
         TextField(
             value = searchQuery,
             onValueChange = { newQuery -> searchQuery = newQuery },
-            label = { Text("Filtrera", fontSize = 16.sp) },
-            placeholder = { Text("Filtrera efter titel och/eller melodi", fontSize = 13.sp) },
+            label = { Text("Sök", fontSize = 16.sp) },
+            placeholder = { Text("Sok efter titel, lyrik eller ID", fontSize = 13.sp) },
             modifier = Modifier
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 20.dp),
             singleLine = true
         )
+
+        if(isLoading){
+            LinearProgressIndicator(Modifier.fillMaxWidth())
+        }
     }
 
     private fun filterSongs(songs: List<Song>, query: String): List<Song> {
@@ -105,14 +138,15 @@ class SongListView : ScreenView{
                 melody = Melody(1, "test1", "")
             ),
         )
+        isLoading = false
 
-        SongListContent(songs) // Show the mock data
+        Content() // Show the mock data
     }
 
     @Composable
     fun SongListContent(songs: List<Song>) {
         // Group songs by chapters
-        val groupedSongs = songs.groupBy { it.chapter }
+        val groupedSongs = songs.groupBy { it.chapter  ?: "Övrigt"}
         Surface(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),

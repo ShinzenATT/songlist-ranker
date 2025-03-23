@@ -3,9 +3,9 @@ agp = "8.7.3"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
-androidx-activityCompose = "1.9.3"
+androidx-activityCompose = "1.10.1"
 androidx-appcompat = "1.7.0"
-androidx-constraintlayout = "2.2.0"
+androidx-constraintlayout = "2.2.1"
 androidx-core-ktx = "1.15.0"
 androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.4"
@@ -17,8 +17,9 @@ kotlin = "2.1.0"
 exposed = "0.57.0"
 voyager = "1.1.0-beta02"
 springDoc = "2.6.0"
-uiAndroid = "1.7.6"
+uiAndroid = "1.7.8"
 material3Android = "1.3.1"
+ktor = "3.1.1"
 
 [libraries]
 h2 = { module = "com.h2database:h2" }
@@ -40,6 +41,7 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android"}
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
@@ -66,6 +68,19 @@ exposed-spring-boot = {group = "org.jetbrains.exposed", name = "exposed-spring-b
 kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.7.3"}
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+
+ktor = { group = "io.ktor", name = "ktor", version.ref = "ktor" }
+ktor-client-json = { group = "io.ktor", name = "ktor-client-json", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+
+[bundles]
+ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

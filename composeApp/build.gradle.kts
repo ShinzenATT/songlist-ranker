@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -52,7 +53,14 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.kotlinx.coroutines.android)
         }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -68,6 +76,9 @@ kotlin {
             implementation(libs.voyager.bottomSheetNavigator)
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.transitions)
+            implementation(libs.kotlinx.serialization)
+            implementation(libs.bundles.ktor.common)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }

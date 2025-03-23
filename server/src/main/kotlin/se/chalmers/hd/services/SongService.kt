@@ -51,7 +51,7 @@ fun updateOrCreateSong(song: Song):SongEntity {
 fun searchSongs(query: String): SizedIterable<SongEntity> {
     val tsRank = TsRank(SongsTable.searchVectors, query).alias("rank")
     val query = SongsTable.select(SongsTable.columns + tsRank)
-        .where { SongsTable.searchVectors tsQuery query }
+        .where { SongsTable.searchVectors tsQuery query.trim() }
         .orderBy(tsRank, SortOrder.DESC)
         .limit(10)
     return SongEntity.wrapRows(query)
