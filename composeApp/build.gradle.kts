@@ -3,7 +3,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -12,7 +11,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.kotlinCocoapods)
+    //alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
@@ -33,7 +32,7 @@ kotlin {
         }
     }
 
-    cocoapods {
+    /*cocoapods {
         // Required properties
         // Specify the required Pod version here
         // Otherwise, the Gradle project version is used
@@ -62,7 +61,7 @@ kotlin {
         // Maps custom Xcode configuration to NativeBuildType
         xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
-    }
+    }*/
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {

@@ -67,10 +67,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           dependency-graph: 'generate-and-submit'
-      - name: Download pod dependencies
-        run: gradle podInstall
-      - name: Build IOS framework
-        run: gradle podPublishDebugXCFramework
+      - name: Build IOS Arm64
+        run: gradle composeApp:linkReleaseFrameworkIosArm64
+      - run: ls -la
+        working-directory: composeApp/build/outputs
   
 
 
