@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.springDoc)
     alias(libs.plugins.asciidoctor)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.shadowJar)
     application
 }
 
@@ -25,6 +26,8 @@ java {
 }
 
 dependencies {
+    compileOnly(libs.apache.compress)
+
     implementation(projects.shared)
     implementation(libs.spring.boot.starter.actuator)
     implementation(libs.spring.boot.starter.quartz)
