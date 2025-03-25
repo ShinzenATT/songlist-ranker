@@ -70,7 +70,12 @@ jobs:
       - name: Build IOS Arm64
         run: gradle composeApp:linkReleaseFrameworkIosArm64
       - run: ls -la
-        working-directory: composeApp/build
+        working-directory: composeApp/build/bin
+      - name: Upload binaries
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: ios-bin
+          path: composeApp/build/bin
   
 
 
