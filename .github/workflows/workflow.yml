@@ -78,6 +78,7 @@ jobs:
         run: |
           xcodebuild -workspace iosApp.xcodeproj \
                      -sdk iphoneos \
+                     -scheme iosApp \
                      -configuration Release \
                      build
       - name: Upload binaries
