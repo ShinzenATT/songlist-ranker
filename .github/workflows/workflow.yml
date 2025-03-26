@@ -76,7 +76,7 @@ jobs:
       - name: Build the IOS IPA
         working-directory: iosApp
         run: |
-          xcodebuild -workspace iosApp.xcodeproj \
+          xcodebuild -project iosApp.xcodeproj \
                      -sdk iphoneos \
                      -scheme iosApp \
                      -configuration Release \
