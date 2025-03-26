@@ -79,7 +79,7 @@ jobs:
           xcodebuild -project iosApp.xcodeproj \
                      -sdk iphoneos \
                      -scheme iosApp \
-                     -configuration Release \
+                     -configuration Debug \
                      build
       - name: Upload binaries
         uses: actions/upload-artifact@v4.6.0
