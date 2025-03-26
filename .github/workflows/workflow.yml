@@ -67,15 +67,24 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           dependency-graph: 'generate-and-submit'
-      - name: Build IOS Arm64
+      - name: Setup XCode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Build IOS Arm64 Framework
         run: gradle composeApp:linkReleaseFrameworkIosArm64
-      - run: ls -la
-        working-directory: composeApp/build/bin
+      - name: Build the IOS IPA
+        working-directory: iosApp
+        run: |
+          xcodebuild -workspace iosApp.xcodeproj \
+                     -sdk iphoneos \
+                     -configuration Release \
+                     build
       - name: Upload binaries
         uses: actions/upload-artifact@v4.6.0
         with:
           name: ios-bin
-          path: composeApp/build/bin
+          path: ~/Library/Developer/Xcode/DerivedData
   
 
 
