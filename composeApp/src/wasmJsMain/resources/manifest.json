@@ -1,0 +1,10 @@
+{
+  "short_name": "Sångboken",
+  "name": "HD-sektionens Sångbok",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "orientation": "natural"
+}
