@@ -4,10 +4,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -26,6 +29,15 @@ import se.chalmers.hd.services.searchSong
 class HomeView: ScreenView {
     override var rootPadding: PaddingValues = PaddingValues()
     private var isLoading by mutableStateOf(false)
+    override var nestedScrollConnection: NestedScrollConnection? = null
+    override val topBarActions: @Composable (RowScope.() -> Unit)
+        get() = {
+            IconButton(
+                onClick = {},
+            ){
+                Icon(Icons.Default.Info, contentDescription = "About App")
+            }
+        }
 
     @Composable
     @Preview

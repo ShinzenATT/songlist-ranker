@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -29,6 +30,7 @@ class SongListView(initialSearch: String = "", initialSongs: List<Song> = listOf
     override var rootPadding: PaddingValues = PaddingValues()
     override val topBarTitle: @Composable (() -> Unit)
         get() = { Text("Sånger") }
+    override var nestedScrollConnection: NestedScrollConnection? = null
     private var songs: List<Song> by mutableStateOf(initialSongs)
     private var searchQuery by mutableStateOf(initialSearch)
     private var isLoading by mutableStateOf(true)
@@ -156,20 +158,18 @@ class SongListView(initialSearch: String = "", initialSongs: List<Song> = listOf
     fun SongListContent(songs: List<Song>) {
         // Group songs by chapters
         val groupedSongs = songs.groupBy { it.chapter  ?: "Övrigt"}
-        Surface(modifier = Modifier.fillMaxSize()) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Top
-            ) {
-                groupedSongs.forEach { (chapter, chapterSongs) ->
-                    // Chapter header
-                    item {
-                        ChapterHeader(chapterName = chapter)
-                    }
-                    // Songs in the chapter
-                    items(chapterSongs) { song ->
-                        SongItem(song)
-                    }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Top
+        ) {
+            groupedSongs.forEach { (chapter, chapterSongs) ->
+                // Chapter header
+                item {
+                    ChapterHeader(chapterName = chapter)
+                }
+                // Songs in the chapter
+                items(chapterSongs) { song ->
+                    SongItem(song)
                 }
             }
         }
