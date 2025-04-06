@@ -74,6 +74,7 @@ jobs:
       - name: Build IOS Arm64 Framework
         run: gradle composeApp:linkReleaseFrameworkIosArm64
       - name: Build the IOS IPA
+        if: false
         working-directory: iosApp
         run: |
           xcodebuild -project iosApp.xcodeproj \

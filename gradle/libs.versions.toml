@@ -16,10 +16,10 @@ junit = "4.13.2"
 kotlin = "2.1.20"
 exposed = "0.60.0"
 voyager = "1.1.0-beta03"
-springDoc = "2.6.0"
+springDoc = "2.8.6"
 uiAndroid = "1.7.8"
 material3Android = "1.3.1"
-ktor = "3.1.1"
+ktor = "3.1.2"
 
 [libraries]
 h2 = { module = "com.h2database:h2" }
@@ -66,7 +66,7 @@ exposed-dao = {group = "org.jetbrains.exposed", name = "exposed-dao", version.re
 exposed-jdbc = {group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposed"}
 exposed-datetime = {group = "org.jetbrains.exposed", name = "exposed-kotlin-datetime", version.ref = "exposed"}
 exposed-spring-boot = {group = "org.jetbrains.exposed", name = "exposed-spring-boot-starter", version.ref = "exposed"}
-kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.0"}
+kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.1"}
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
@@ -90,10 +90,10 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-mu
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-springBoot = {id = "org.springframework.boot", version = "3.4.3"}
-springDependencyManagement = {id = "io.spring.dependency-management", version = "1.1.6" }
+springBoot = {id = "org.springframework.boot", version = "3.4.4"}
+springDependencyManagement = {id = "io.spring.dependency-management", version = "1.1.7" }
 springDoc = {id = "org.springdoc.openapi-gradle-plugin", version = "1.9.0"}
 kotlinxSerialization ={id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
-asciidoctor = {id = "org.asciidoctor.jvm.convert", version = "3.3.2"}
+asciidoctor = {id = "org.asciidoctor.jvm.convert", version = "4.0.4"}
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-shadowJar = { id = "com.gradleup.shadow", version = "8.3.5"}
+shadowJar = { id = "com.gradleup.shadow", version = "8.3.6"}
