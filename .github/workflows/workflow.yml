@@ -117,7 +117,7 @@ jobs:
         uses: actions/upload-artifact@v4.6.0
         with:
           name: song-ranker-web
-          path: build/js/packages/composeApp/kotlin
+          path: composeApp/build/dist/wasmJs/productionExecutable
 
   build-web-image:
     runs-on: ubuntu-latest
