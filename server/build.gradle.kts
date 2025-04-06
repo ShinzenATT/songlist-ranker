@@ -1,3 +1,6 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
+
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.springBoot)
@@ -24,6 +27,24 @@ java {
         languageVersion = JavaLanguageVersion.of(23)
     }
 }
+
+
+tasks.withType<ShadowJar> {
+    isZip64 = true
+    configurations = listOf(project.configurations.runtimeClasspath.get())
+
+    // Required for Spring
+    mergeServiceFiles()
+    append("META-INF/spring.handlers")
+    append("META-INF/spring.schemas")
+    append("META-INF/spring.tooling")
+    append("META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports")
+    transform(PropertiesFileTransformer().apply {
+        paths = listOf("META-INF/spring.factories")
+        mergeStrategy = "append"
+    })
+}
+
 
 dependencies {
     compileOnly(libs.apache.compress)
