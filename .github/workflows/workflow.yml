@@ -112,7 +112,7 @@ jobs:
         with:
           dependency-graph: 'generate-and-submit'
       - name: Build website
-        run: gradle :composeApp:wasmJsProductionExecutableCompileSync --no-daemon
+        run: gradle composeApp:wasmJsBrowserDistribution --no-daemon
       - name: Upload webfiles
         uses: actions/upload-artifact@v4.6.0
         with:
