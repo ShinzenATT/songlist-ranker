@@ -18,6 +18,6 @@ WORKDIR /home/gradle
 
 # Build our jar file
 #RUN ./gradlew :server:shadowJar --no-daemon
-COPY server/build/libs/*-all.jar /home/gradle/server.jar
+COPY "server/build/libs/server-1.0.0-all.jar" /home/gradle/server.jar
 
 ENTRYPOINT ["java","-jar","/home/gradle/server.jar"]
