@@ -1,14 +1,18 @@
 package se.chalmers.hd.controllers.http
 
 import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransactionAsync
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import se.chalmers.hd.configuration.AppConfig
 import se.chalmers.hd.db.melodies.MelodyEntity
 import se.chalmers.hd.dto.Melody
 import se.chalmers.hd.services.updateOrCreateMelody
 import se.chalmers.hd.utils.mappers.toMelodyData
 
 @RestController
-class MelodyController {
+class MelodyController(val config: AppConfig) {
 
     @GetMapping("/melodies")
     suspend fun getAllMelodies() = suspendedTransactionAsync {
@@ -22,8 +26,18 @@ class MelodyController {
     }.await()
 
     @PostMapping("/melodies")
-    suspend fun submitMelody(@RequestBody melody: Melody) = suspendedTransactionAsync {
-        return@suspendedTransactionAsync updateOrCreateMelody(melody).toMelodyData()
-    }.await()
+    suspend fun submitMelody(
+        @RequestHeader(HttpHeaders.AUTHORIZATION) auth: String,
+        @RequestBody melody: Melody
+    ): ResponseEntity<Melody> {
+        if(!config.checkCredentials(auth)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).header(HttpHeaders.WWW_AUTHENTICATE, "Basic").build<Melody>()
+        }
+
+        val res = suspendedTransactionAsync {
+            return@suspendedTransactionAsync updateOrCreateMelody(melody).toMelodyData()
+        }.await()
+        return ResponseEntity.accepted().body(res)
+    }
 
 }

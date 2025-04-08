@@ -5,3 +5,7 @@ spring:
     url: "jdbc:postgresql://localhost:5432/hd"
     username: "hd"
     password: "hd"
+
+app:
+  api-username: dummy
+  api-password: youShouldReallyChangeThis

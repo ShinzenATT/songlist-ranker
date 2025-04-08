@@ -2,7 +2,7 @@
 #
 # To get started with Nuxt see: https://nuxtjs.org/docs/get-started/installation
 #
-name: Build artifacts
+name: Build server artifacts
 
 on:
   # Runs on pushes targeting the default branch
