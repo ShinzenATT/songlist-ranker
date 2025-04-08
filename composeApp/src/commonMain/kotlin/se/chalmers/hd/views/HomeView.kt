@@ -32,8 +32,9 @@ class HomeView: ScreenView {
     override var nestedScrollConnection: NestedScrollConnection? = null
     override val topBarActions: @Composable (RowScope.() -> Unit)
         get() = {
+            val navigator = LocalNavigator.current
             IconButton(
-                onClick = {},
+                onClick = {navigator?.push(AboutView())},
             ){
                 Icon(Icons.Default.Info, contentDescription = "About App")
             }
