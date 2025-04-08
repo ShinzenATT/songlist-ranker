@@ -72,8 +72,7 @@ jobs:
         name: Download server artifact
         with:
           name: songranker-server-jar
-      - name: unzip artifact
-        run: unzip songranker-server-jar -d server/build/libs/
+          path: server/build/libs
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
