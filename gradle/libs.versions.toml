@@ -48,7 +48,7 @@ voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sh
 voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 
-apache-compress = {group = "org.apache.commons", name = "commons-compress", version = "1.27.1"}
+apache-compress = {group = "org.apache.commons", name = "commons-compress", version = "1.28.0"}
 postgresql = { module = "org.postgresql:postgresql" }
 reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
 reactor-test = { module = "io.projectreactor:reactor-test" }
