@@ -1,25 +1,26 @@
 [versions]
-agp = "8.7.3"
-android-compileSdk = "35"
+agp = "8.12.3"
+android-compileSdk = "36"
 android-minSdk = "24"
-android-targetSdk = "35"
-androidx-activityCompose = "1.10.1"
-androidx-appcompat = "1.7.0"
+android-targetSdk = "36"
+androidx-activityCompose = "1.11.0"
+androidx-appcompat = "1.7.1"
 androidx-constraintlayout = "2.2.1"
-androidx-core-ktx = "1.15.0"
-androidx-espresso-core = "3.6.1"
-androidx-lifecycle = "2.8.4"
-androidx-material = "1.12.0"
-androidx-test-junit = "1.2.1"
-compose-multiplatform = "1.7.3"
+androidx-core-ktx = "1.17.0"
+androidx-espresso-core = "3.7.0"
+androidx-lifecycle = "2.9.4"
+androidx-material = "1.13.0"
+androidx-test-junit = "1.3.0"
+compose-multiplatform = "1.9.0"
 junit = "4.13.2"
-kotlin = "2.1.20"
-exposed = "0.60.0"
+kotlin = "2.2.20"
+exposed = "0.61.0"
+materialIconsExtended = "1.7.3"
 voyager = "1.1.0-beta03"
-springDoc = "2.8.6"
-uiAndroid = "1.7.8"
-material3Android = "1.3.1"
-ktor = "3.1.2"
+springDoc = "2.8.13"
+uiAndroid = "1.9.2"
+material3Android = "1.4.0"
+ktor = "3.3.0"
 
 [libraries]
 h2 = { module = "com.h2database:h2" }
@@ -42,13 +43,14 @@ kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android"}
+material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
 voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 
-apache-compress = {group = "org.apache.commons", name = "commons-compress", version = "1.27.1"}
+apache-compress = {group = "org.apache.commons", name = "commons-compress", version = "1.28.0"}
 postgresql = { module = "org.postgresql:postgresql" }
 reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
 reactor-test = { module = "io.projectreactor:reactor-test" }
@@ -66,7 +68,7 @@ exposed-dao = {group = "org.jetbrains.exposed", name = "exposed-dao", version.re
 exposed-jdbc = {group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposed"}
 exposed-datetime = {group = "org.jetbrains.exposed", name = "exposed-kotlin-datetime", version.ref = "exposed"}
 exposed-spring-boot = {group = "org.jetbrains.exposed", name = "exposed-spring-boot-starter", version.ref = "exposed"}
-kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.1"}
+kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.9.0"}
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
@@ -90,10 +92,10 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-mu
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-springBoot = {id = "org.springframework.boot", version = "3.4.4"}
+springBoot = {id = "org.springframework.boot", version = "3.5.6"}
 springDependencyManagement = {id = "io.spring.dependency-management", version = "1.1.7" }
 springDoc = {id = "org.springdoc.openapi-gradle-plugin", version = "1.9.0"}
 kotlinxSerialization ={id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
-asciidoctor = {id = "org.asciidoctor.jvm.convert", version = "4.0.4"}
+asciidoctor = {id = "org.asciidoctor.jvm.convert", version = "4.0.5"}
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-shadowJar = { id = "com.gradleup.shadow", version = "8.3.6"}
+shadowJar = { id = "com.gradleup.shadow", version = "9.2.2"}
