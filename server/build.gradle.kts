@@ -39,17 +39,17 @@ tasks.withType<ShadowJar> {
     append("META-INF/spring.schemas")
     append("META-INF/spring.tooling")
     append("META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports")
-    /*
-    TODO verify if needed
-    transform(PropertiesFileTransformer().apply {
+    transform(PropertiesFileTransformer::class.java) {
         paths = listOf("META-INF/spring.factories")
-        mergeStrategy = "append"
-    })*/
+        mergeStrategy.set(PropertiesFileTransformer.MergeStrategy.Append)
+    }
+
+    from(sourceSets.main.get().output)
 }
 
 
 dependencies {
-    compileOnly(libs.apache.compress)
+    //compileOnly(libs.apache.compress)
 
     implementation(projects.shared)
     implementation(libs.spring.boot.starter.actuator)
