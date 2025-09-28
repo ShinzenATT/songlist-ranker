@@ -46,8 +46,8 @@ jobs:
       - name: Upload jar
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: songranker-server-jar
-          path: server/build/libs/server-1.0.0-all.jar
+          name: songranker-server-build
+          path: server/build
 
 
   build-server-image:
@@ -71,8 +71,8 @@ jobs:
       - uses: actions/download-artifact@v4
         name: Download server artifact
         with:
-          name: songranker-server-jar
-          path: server/build/libs
+          name: songranker-server-build
+          path: server/build
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
