@@ -6,6 +6,11 @@ spring:
     username: "hd"
     password: "hd"
 
+management:
+  health:
+    ssl:
+      enabled: false
+
 app:
   api-username: dummy
   api-password: youShouldReallyChangeThis
