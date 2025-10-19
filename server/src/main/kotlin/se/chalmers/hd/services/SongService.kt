@@ -1,8 +1,10 @@
 package se.chalmers.hd.services
 
-import org.jetbrains.exposed.sql.SizedIterable
-import org.jetbrains.exposed.sql.SortOrder
-import org.jetbrains.exposed.sql.alias
+import org.jetbrains.exposed.v1.core.SortOrder
+import org.jetbrains.exposed.v1.core.alias
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.SizedIterable
+import org.jetbrains.exposed.v1.jdbc.select
 import se.chalmers.hd.db.configuration.TsRank
 import se.chalmers.hd.db.configuration.tsQuery
 import se.chalmers.hd.db.melodies.MelodyEntity

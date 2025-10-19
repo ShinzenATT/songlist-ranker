@@ -1,6 +1,6 @@
 package se.chalmers.hd.db.configuration
 
-import org.jetbrains.exposed.sql.ColumnType
+import org.jetbrains.exposed.v1.core.ColumnType
 import org.postgresql.util.PGobject
 
 class TsVectorColumnType: ColumnType<String>(nullable = true) {

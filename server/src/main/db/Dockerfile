@@ -11,7 +11,7 @@ ENV POSTGRES_PASSWORD=hd
 #RUN apt-get update && apt-get upgrade -y
 
 ADD initdb.d /docker-entrypoint-initdb.d/
-ADD seeds /docker-entrypoint-initdb.d/
+#ADD seeds /docker-entrypoint-initdb.d/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 

@@ -1,6 +1,6 @@
 package se.chalmers.hd.db.songs
 
-import org.jetbrains.exposed.dao.id.IntIdTable
+import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import se.chalmers.hd.db.configuration.tsVector
 import se.chalmers.hd.db.melodies.MelodyTable
 import se.chalmers.hd.db.tags.TagTable

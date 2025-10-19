@@ -7,3 +7,5 @@ dependencyResolutionManagement {
         }
     }
 }
+
+includeBuild("../shared")

@@ -1,9 +1,9 @@
 package se.chalmers.hd.db.configuration
 
-import org.jetbrains.exposed.sql.Expression
-import org.jetbrains.exposed.sql.Op
-import org.jetbrains.exposed.sql.QueryBuilder
-import org.jetbrains.exposed.sql.stringLiteral
+import org.jetbrains.exposed.v1.core.Expression
+import org.jetbrains.exposed.v1.core.Op
+import org.jetbrains.exposed.v1.core.QueryBuilder
+import org.jetbrains.exposed.v1.core.stringLiteral
 
 class TsQuery(val tsVectorColumn: Expression<String>, val query: String): Op<Boolean>() {
     override fun toQueryBuilder(queryBuilder: QueryBuilder) {

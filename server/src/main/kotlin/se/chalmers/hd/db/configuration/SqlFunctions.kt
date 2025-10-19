@@ -1,8 +1,7 @@
 package se.chalmers.hd.db.configuration
 
-import org.jetbrains.exposed.sql.Column
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.alias
+import org.jetbrains.exposed.v1.core.Column
+import org.jetbrains.exposed.v1.core.Table
 
 fun Table.tsVector(name: String) = registerColumn<String>(name, TsVectorColumnType()).databaseGenerated()
 
