@@ -1,7 +1,7 @@
 FROM openjdk:23-slim
 WORKDIR /home/gradle
 
-RUN apt install openssl
+RUN apt install openssl curl
 
 # Build our jar file
 COPY --chmod=0777 --chown=gradle build/libs/*.jar /home/gradle/server.jar

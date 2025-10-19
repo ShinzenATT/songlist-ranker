@@ -1,0 +1,26 @@
+services:
+  songlist-server:
+    image: ghcr.io/shinzenatt/songlist-server:latest
+    build: server/server.Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      "spring.datasource.url": "jdbc:postgresql://songlist-db:5432/hd"
+  songlist-db:
+    image: postgres:17-alpine
+    volumes:
+      - "./server/db/initdb.d:/docker-entrypoint-initdb.d/:ro"
+    environment:
+      TZ: "Europe/Stockholm"
+      POSTGRES_ROOT_PASSWORD: root
+      POSTGRES_DB: hd
+      POSTGRES_USER: hd
+      POSTGRES_PASSWORD: hd
+    ports:
+      - "5432:5432"
+  songlist-web:
+    image: ghcr.io/shinzenatt/songlist-web:latest
+    build: app/web.Dockerfile
+    ports:
+      - "80:80"
+
