@@ -1,10 +1,12 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -12,6 +14,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    id("com.codingfeline.buildkonfig") version "0.17.1"
     //alias(libs.plugins.kotlinCocoapods)
 }
 
@@ -117,6 +120,29 @@ kotlin {
             implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
         }
+    }
+}
+
+buildkonfig {
+    packageName = "se.chalmers.hd"
+
+    // Load optional local.properties (for developer machines)
+    val localProps = Properties().apply {
+        val f = rootProject.file("local.properties")
+        if (f.exists()) f.inputStream().use { load(it) }
+    }
+
+    // Resolve value precedence: ENV -> Gradle property -> local.properties -> default
+    val serverUrl = System.getenv("SERVER_URL")
+        ?: (project.findProperty("SERVER_URL") as String?)
+        ?: localProps.getProperty("SERVER_URL")
+
+    defaultConfigs {
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "SERVER_URL",
+            serverUrl ?: "http://localhost:8080" // or "http://10.0.2.2:8080"
+        )
     }
 }
 

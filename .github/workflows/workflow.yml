@@ -25,6 +25,9 @@ permissions:
   attestations: write
   packages: write
 
+env:
+  SERVER_URL: ${{ vars.SERVER_URL }}
+
 jobs:
   build-android:
     name: Build Android

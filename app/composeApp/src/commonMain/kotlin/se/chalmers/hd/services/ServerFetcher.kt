@@ -11,6 +11,7 @@ import kotlinx.serialization.json.Json
 import se.chalmers.hd.dto.Melody
 import se.chalmers.hd.dto.Song
 import se.chalmers.hd.dto.requests.SearchRequest
+import se.chalmers.hd.BuildKonfig
 
 private val client = HttpClient() {
     expectSuccess = true
@@ -19,7 +20,7 @@ private val client = HttpClient() {
         json(Json { ignoreUnknownKeys = true })
     }
 }
-private const val url = "http://10.0.2.2:8080"
+private val url = BuildKonfig.SERVER_URL
 
 suspend fun getSongList(): List<Song>  = client.get("$url/songs").body()
 
