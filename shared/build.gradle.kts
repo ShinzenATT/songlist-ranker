@@ -9,6 +9,9 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
 }
 
+group = "se.chalmers.hd"
+version = "1.0.0"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -16,13 +19,13 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    
+
     jvm()
-    
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser {
@@ -39,7 +42,7 @@ kotlin {
             }
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization)
