@@ -51,7 +51,7 @@ tasks.withType<ShadowJar> {
 dependencies {
     //compileOnly(libs.apache.compress)
 
-    implementation(projects.shared)
+    implementation(libs.shared)
     implementation(libs.spring.boot.starter.actuator)
     implementation(libs.spring.boot.starter.quartz)
     implementation(libs.spring.boot.starter.webflux)

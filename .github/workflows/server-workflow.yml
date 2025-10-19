@@ -42,7 +42,7 @@ jobs:
         with:
           dependency-graph: 'generate-and-submit'
       - name: Build server jar
-        run: gradle :server:shadowJar --no-daemon
+        run: gradle :server:bootJar --no-daemon
       - name: Upload jar
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -77,7 +77,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: server
           file: server.Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64

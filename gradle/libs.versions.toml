@@ -16,6 +16,7 @@ junit = "4.13.2"
 kotlin = "2.2.20"
 exposed = "0.61.0"
 materialIconsExtended = "1.7.3"
+projectVer = "1.0.0"
 voyager = "1.1.0-beta03"
 springDoc = "2.8.13"
 uiAndroid = "1.9.2"
@@ -44,6 +45,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android"}
 material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+shared = { module = "se.chalmers.hd:shared", version.ref = "projectVer" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }

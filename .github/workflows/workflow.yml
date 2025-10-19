@@ -9,9 +9,8 @@ on:
   push:
     branches: ["master"]
     paths:
-      - composeApp/**
+      - app/**
       - shared/**
-      - iosApp/**
       - gradle/**
 
   # Allows you to run this workflow manually from the Actions tab
@@ -43,18 +42,18 @@ jobs:
         with:
           dependency-graph: 'generate-and-submit'
       - name: Build with Gradle
-        run: gradle :composeApp:assembleRelease --no-daemon
+        run: gradle :app:composeApp:assembleRelease --no-daemon
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4.6.0
         with:
           name: songranker-debug.apk
-          path: composeApp/build/outputs/apk/debug/composeApp-debug.apk
+          path: app/composeApp/build/outputs/apk/debug/composeApp-debug.apk
       - name: Upload release APK
         uses: actions/upload-artifact@v4.6.0
         with:
           name: songranker-release-unsigned.apk
-          path: composeApp/build/outputs/apk/release/composeApp-release-unsigned.apk
+          path: app/composeApp/build/outputs/apk/release/composeApp-release-unsigned.apk
 
   build-ios:
     runs-on: macos-latest
@@ -77,10 +76,10 @@ jobs:
         with:
           xcode-version: latest-stable
       - name: Build IOS Arm64 Framework
-        run: gradle composeApp:linkReleaseFrameworkIosArm64
+        run: gradle :app:composeApp:linkReleaseFrameworkIosArm64
       - name: Build the IOS IPA
         if: false
-        working-directory: iosApp
+        working-directory: app/iosApp
         run: |
           xcodebuild -project iosApp.xcodeproj \
                      -sdk iphoneos \
@@ -117,7 +116,7 @@ jobs:
         with:
           dependency-graph: 'generate-and-submit'
       - name: Build website
-        run: gradle composeApp:wasmJsBrowserDistribution --no-daemon
+        run: gradle :app:composeApp:wasmJsBrowserDistribution --no-daemon
       - name: Upload webfiles
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -151,7 +150,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: app
           file: web.Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
