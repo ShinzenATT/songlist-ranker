@@ -146,7 +146,7 @@ jobs:
         name: Download web artifact
         with:
           name: song-ranker-web
-          path: build/js/packages/composeApp/kotlin
+          path: app/composeApp/build/dist/wasmJs/productionExecutable
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6

@@ -7,4 +7,4 @@
 FROM nginx:alpine as deploy
 
 #COPY --from=build /home/gradle/build/js/packages/composeApp/kotlin /usr/share/nginx/html
-COPY build/js/packages/composeApp/kotlin /usr/share/nginx/html
+COPY composeApp/build/dist/wasmJs/productionExecutable /usr/share/nginx/html
