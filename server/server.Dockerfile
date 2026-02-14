@@ -1,4 +1,4 @@
-FROM openjdk:23
+FROM openjdk:25
 WORKDIR /home/gradle
 
 # Build our jar file
