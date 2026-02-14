@@ -20,7 +20,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -32,6 +32,7 @@ dependencies {
     implementation(libs.spring.boot.starter.quartz)
     implementation(libs.spring.boot.starter.webflux)
     implementation(libs.spring.boot.starter.websocket)
+    implementation(libs.spring.boot.starter.jdbc)
     implementation(libs.jackson.module.kotlin)
     implementation(libs.reactor.kotlin.extensions)
     implementation(libs.kotlin.reflect)
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.exposed.datetime)
     implementation(libs.exposed.spring.boot)
     implementation(libs.postgresql)
+//    implementation(libs.r2dbc.postgresql)
 
     testImplementation(libs.kotlin.test.junit)
     testImplementation(libs.reactor.test)

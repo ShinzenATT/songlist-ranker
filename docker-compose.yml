@@ -9,7 +9,7 @@ services:
   songlist-db:
     image: postgres:17-alpine
     volumes:
-      - "./server/db/initdb.d:/docker-entrypoint-initdb.d/:ro"
+      - "./server/src/main/db/initdb.d:/docker-entrypoint-initdb.d/:ro"
     environment:
       TZ: "Europe/Stockholm"
       POSTGRES_ROOT_PASSWORD: root

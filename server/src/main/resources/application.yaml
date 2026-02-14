@@ -5,6 +5,7 @@ spring:
     url: "jdbc:postgresql://localhost:5432/hd"
     username: "hd"
     password: "hd"
+#    driver-class-name: org.postgresql.Driver
 
 management:
   health:

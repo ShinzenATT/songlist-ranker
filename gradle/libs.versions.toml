@@ -3,25 +3,27 @@ agp = "8.12.3"
 android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
-androidx-activityCompose = "1.11.0"
+androidx-activityCompose = "1.12.4"
 androidx-appcompat = "1.7.1"
 androidx-constraintlayout = "2.2.1"
 androidx-core-ktx = "1.17.0"
 androidx-espresso-core = "3.7.0"
-androidx-lifecycle = "2.9.5"
+androidx-lifecycle = "2.9.6"
 androidx-material = "1.13.0"
 androidx-test-junit = "1.3.0"
-compose-multiplatform = "1.9.1"
+compose-multiplatform = "1.10.1"
 junit = "4.13.2"
-kotlin = "2.2.20"
-exposed = "1.0.0-rc-2"
+kotlin = "2.3.10"
+exposed = "1.0.0"
 materialIconsExtended = "1.7.3"
 projectVer = "1.0.0"
+r2dbcPostgresql = "1.1.1.RELEASE"
+uiTooling = "1.10.1"
 voyager = "1.1.0-beta03"
 springDoc = "2.8.13"
-uiAndroid = "1.9.3"
+uiAndroid = "1.10.3"
 material3Android = "1.4.0"
-ktor = "3.3.1"
+ktor = "3.4.0"
 
 [libraries]
 h2 = { module = "com.h2database:h2" }
@@ -45,7 +47,10 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android"}
 material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+r2dbc-postgresql = { module = "org.postgresql:r2dbc-postgresql", version.ref = "r2dbcPostgresql" }
 shared = { module = "se.chalmers.hd:shared", version.ref = "projectVer" }
+spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
+ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "uiTooling" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
@@ -70,7 +75,7 @@ exposed-dao = {group = "org.jetbrains.exposed", name = "exposed-dao", version.re
 exposed-jdbc = {group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposed"}
 exposed-datetime = {group = "org.jetbrains.exposed", name = "exposed-kotlin-datetime", version.ref = "exposed"}
 exposed-spring-boot = {group = "org.jetbrains.exposed", name = "exposed-spring-boot-starter", version.ref = "exposed"}
-kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.9.0"}
+kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.10.0"}
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
@@ -94,10 +99,9 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-mu
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-springBoot = {id = "org.springframework.boot", version = "3.5.6"}
+springBoot = {id = "org.springframework.boot", version = "3.5.10"} # wait for exposed starter to support spring 4.0
 springDependencyManagement = {id = "io.spring.dependency-management", version = "1.1.7" }
 springDoc = {id = "org.springdoc.openapi-gradle-plugin", version = "1.9.0"}
 kotlinxSerialization ={id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 asciidoctor = {id = "org.asciidoctor.jvm.convert", version = "4.0.5"}
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-shadowJar = { id = "com.gradleup.shadow", version = "9.2.2"}
