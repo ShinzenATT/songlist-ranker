@@ -141,7 +141,7 @@ buildkonfig {
         buildConfigField(
             FieldSpec.Type.STRING,
             "SERVER_URL",
-            serverUrl ?: "http://localhost:8080" // or "http://10.0.2.2:8080"
+            serverUrl ?: /* "http://localhost:8080"  */ "http://10.0.2.2:8080"
         )
     }
 }
@@ -177,6 +177,6 @@ android {
 dependencies {
     implementation(libs.androidx.ui.android)
     implementation(libs.androidx.material3.android)
-    debugImplementation(compose.uiTooling)
+    debugImplementation(libs.ui.tooling)
 }
 
