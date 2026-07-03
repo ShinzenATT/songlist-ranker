@@ -1,6 +1,6 @@
 services:
   songlist-server:
-    image: ghcr.io/shinzenatt/songlist-server:latest
+    #image: ghcr.io/shinzenatt/songlist-server:latest
     build: server
     ports:
       - "8080:8080"
